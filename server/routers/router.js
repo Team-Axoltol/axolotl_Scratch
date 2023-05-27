@@ -13,7 +13,7 @@ router.get('/homepage/getComments', controller.getComments, (req, res) => {
     res.status(200).json(res.locals.comments)
 })
 
-router.post('/homepage/createPosts', controller.createPosts, (req, res) => {
+router.post('/homepage/createPost', controller.createPost, (req, res) => {
     res.status(200).json(res.locals.posts)
 })
 

@@ -19,7 +19,7 @@ controller.getPosts = async (req, res, next) => {
   }
 }
 
-controller.createPosts = async ( req, res, next ) => {
+controller.createPost = async ( req, res, next ) => {
 
   const { industry, body, company, date } = req.body;
   try{
