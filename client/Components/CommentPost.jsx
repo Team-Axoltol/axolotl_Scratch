@@ -8,10 +8,29 @@ const Post = () => {
   const [formDataRes, setFormDataRes] = useState({
     industry: "",
     company: "",
-    salary: "",
-    zipcode: "",
-    feedbackpost: "",
+    body: "",
+    date: "",
   });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const postData = async () => {
+      try {
+        console.log("posting");
+        const response = await fetch("/api/homepage/createPost", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formDataRes),
+        });
+        if (!response) {
+          throw new Error("Request Failed");
+        }
+        const newPost = await response.json();
+      } catch (err) {
+        console.log("error at post ");
+      }
+    };
+  };
   //    useEffect(() => {
   //     const fetchData = async() =>{
   //         try{
@@ -39,7 +58,7 @@ const Post = () => {
       </div>
       <label>Share your Experience</label>
       <div>
-        <form className="post">
+        <form className="post" onSubmit={handleSubmit}>
           <label>Industry</label>
           <input
             onChange={(e) =>
@@ -59,36 +78,29 @@ const Post = () => {
             type="text"
             name="company"
           />
-          <label>Salary</label>
+          <label>Body</label>
 
           <input
             onChange={(e) =>
-              setFormDataRes({ ...formDataRes, salary: e.target.value })
+              setFormDataRes({ ...formDataRes, body: e.target.value })
             }
-            value={formDataRes.salary}
+            value={formDataRes.body}
             type="text"
-            name="salary"
+            name="company"
           />
-          <label>Zip Code</label>
+          <label>Date</label>
 
           <input
             onChange={(e) =>
-              setFormDataRes({ ...formDataRes, zipcode: e.target.value })
+              setFormDataRes({ ...formDataRes, date: e.target.value })
             }
-            value={formDataRes.zipcode}
-            type="text"
-            name="zipcode"
-          />
-          <label>Post</label>
-
-          <input
-            onChange={(e) =>
-              setFormDataRes({ ...formDataRes, post: e.target.value })
-            }
-            value={formDataRes.post}
-            type="text"
+            value={formDataRes.date}
+            type="date"
             name="post"
           />
+          <button className="postbutton" type="submit">
+            POST
+          </button>
         </form>
       </div>
 
