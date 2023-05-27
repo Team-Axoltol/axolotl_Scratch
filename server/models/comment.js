@@ -15,7 +15,7 @@ const Schema = mongoose.Schema;
 const commentSchema = new Schema({
   user_id: {type: Schema.Types.ObjectId, ref: 'user'},
   industry: {type: String, required: true},
-  post: {type: Schema.Types.ObjectId, ref: 'Post', required: true},
+  parent: {type: Schema.Types.ObjectId, ref: 'Post', required: true},
   body: {type: String, required: true},
   date: {type: Date, default: Date.now, required: true}
 })
