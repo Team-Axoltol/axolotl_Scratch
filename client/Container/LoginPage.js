@@ -5,6 +5,11 @@ function LoginPage() {
   const [pwValue, setPwValue] = useState("");
   const [accValue, setAccValue] = useState("");
 
+  const clickhandler = () => {
+    console.log(pwValue, accValue);
+    //post to somewhere else?
+  }
+
   return (
     <div
       style={{
@@ -40,7 +45,7 @@ function LoginPage() {
         </div>
       </div>
       <div>
-        <button>This is a button :D</button>
+        <button onClick={()=>clickhandler()}>This is a button :D</button>
       </div>
     </div>
   );
