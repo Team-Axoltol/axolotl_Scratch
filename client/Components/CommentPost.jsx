@@ -14,6 +14,8 @@ const Post = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(`datecheckyo`, typeof formDataRes.date);
+
     const postData = async () => {
       try {
         console.log("posting");
@@ -48,7 +50,6 @@ const Post = () => {
   // },[])
 
   const postfeed = "placeholder";
-
   return isLoading ? (
     <div>loading...</div>
   ) : (

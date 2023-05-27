@@ -34,9 +34,7 @@ function NavBar() {
             backgroundColor: "rgba(105, 235, 255, 0.85)",
           }}
         >
-          <Link to="/">
-            <a>Home </a>
-          </Link>
+          <Link to="/">Home</Link>
         </button>
         <button
           style={{
@@ -51,9 +49,7 @@ function NavBar() {
             backgroundColor: "rgba(105, 235, 255, 0.85)",
           }}
         >
-          <Link to="/ProfilePage">
-            <a>Profile Page</a>
-          </Link>
+          <Link to="/ProfilePage">Profile Page</Link>
         </button>
         <button
           style={{
@@ -68,9 +64,7 @@ function NavBar() {
             backgroundColor: "rgba(105, 235, 255, 0.85)",
           }}
         >
-          <Link to="AppliedJobLog">
-            <a>Job Searching </a>
-          </Link>
+          <Link to="AppliedJobLog">Job Searching</Link>
         </button>
         <button
           style={{
@@ -85,7 +79,7 @@ function NavBar() {
             backgroundColor: "rgba(105, 235, 255, 0.85)",
           }}
         >
-          <a>New Job Listing </a>
+          New Job Listing
         </button>
         <button
           style={{
@@ -100,9 +94,7 @@ function NavBar() {
             backgroundColor: "rgba(105, 235, 255, 0.85)",
           }}
         >
-          <Link to="LoginPage">
-            <a>Login </a>
-          </Link>
+          <Link to="LoginPage">Login</Link>
         </button>
       </div>
     </div>
