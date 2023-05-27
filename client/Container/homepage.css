@@ -1,0 +1,42 @@
+.postandcomments {
+    border: 1px solid;
+    width: 90%;
+    height: 70vh;
+
+}
+
+.title {
+display: flex;
+
+}
+
+.even{
+    display: flex;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color:rgb(85, 85, 85)
+}
+
+.homewrapper{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.dropdownWrapper{
+display: flex;
+justify-content: flex-end;
+}
+
+.custom-select {
+width: 20%
+
+}
+
+.title {
+display: flex;
+align-items: center;
+justify-content: center;
+}

@@ -60,6 +60,7 @@
     "mquery": "^5.0.0",
     "ms": "^2.0.0",
     "negotiator": "^0.6.3",
+    "nodemon": "^2.0.22",
     "object-assign": "^4.1.1",
     "object-inspect": "^1.12.3",
     "on-finished": "^2.4.1",
@@ -120,3 +121,4 @@
     "webpack-dev-server": "^4.15.0"
   }
 }
+

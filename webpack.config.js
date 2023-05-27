@@ -1,6 +1,6 @@
 const path = require("path");
 const HTMLWebpackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   entry: "./client/index.js",
@@ -14,6 +14,7 @@ module.exports = {
     new HTMLWebpackPlugin({
       template: "./client/index.html",
     }),
+    new MiniCssExtractPlugin(),
   ],
 
   module: {
@@ -41,6 +42,7 @@ module.exports = {
     ],
   },
   devServer: {
+    port: 8081,
     historyApiFallback: true,
     static: {
       directory: path.join(__dirname, "./build"),
