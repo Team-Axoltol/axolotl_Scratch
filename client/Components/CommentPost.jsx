@@ -14,7 +14,8 @@ const Post = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(`datecheckyo`, typeof formDataRes.date);
+    // console.log(`datecheckyo`, typeof formDataRes.date);
+    console.log(`formdatacheck`, formDataRes)
 
     const postData = async () => {
       try {
@@ -28,10 +29,13 @@ const Post = () => {
           throw new Error("Request Failed");
         }
         const newPost = await response.json();
+        console.log('newpost', newPost)
       } catch (err) {
         console.log("error at post ");
+        console.log(err);
       }
     };
+    postData();
   };
   //    useEffect(() => {
   //     const fetchData = async() =>{

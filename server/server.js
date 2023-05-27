@@ -1,9 +1,9 @@
 const express = require("express");
 const app = express();
-const server = require("http").createServer(app);
-const io = require("socket.io")(server);
+// const server = require("http").createServer(app);
+// const io = require("socket.io")(server);
 const path = require("path");
-const { disconnect } = require("process");
+// const { disconnect } = require("process");
 const router = require('./routers/router')
 
 app.use(express.json());
@@ -31,6 +31,9 @@ app.use((err, req, res, next) => {
 });
 
 
-server.listen(8080, () => {
-  console.log("Starting at", 8080);
+app.listen(3000, () => {
+  console.log("Starting at", 3000);
 });
+
+
+module.exports = app;

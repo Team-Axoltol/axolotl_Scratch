@@ -16,7 +16,7 @@ const Schema = mongoose.Schema;
 
 const postSchema = new Schema({
   user_id: { type: Schema.Types.ObjectId, ref: "user" },
-  title: { type: String, required: true },
+  title: { type: String },
   body: { type: String, required: true },
   comments: [{ type: Schema.Types.ObjectId, ref: "comment" }],
   topic: { type: String, default: "general" },
@@ -25,6 +25,15 @@ const postSchema = new Schema({
   city: { type: String },
   date: { type: String, required: true },
 });
+
+
+// const postSchema = new Schema({
+//   body: { type: String },
+//   industry: { type: String },
+//   company: { type: String },
+//   date: { type: String },
+// });
+
 
 const Post = mongoose.model("post", postSchema);
 

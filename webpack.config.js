@@ -4,6 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   entry: "./client/index.js",
+  mode: process.env.NODE_ENV,
 
   output: {
     path: path.join(__dirname, "/build"),
@@ -16,7 +17,6 @@ module.exports = {
     }),
     new MiniCssExtractPlugin(),
   ],
-
   module: {
     rules: [
       {
@@ -48,11 +48,11 @@ module.exports = {
         exclude: /node_modules/,
         use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
-      {
-        test: /\.m?js$/,
-        enforce: "pre",
-        use: ["source-map-loader"],
-      },
+      // {
+      //   test: /\.m?js$/,
+      //   enforce: "pre",
+      //   use: ["source-map-loader"],
+      // },
     ],
   },
   devServer: {
