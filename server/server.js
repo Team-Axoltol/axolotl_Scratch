@@ -4,7 +4,7 @@ const server = require("http").createServer(app);
 const io = require("socket.io")(server);
 const path = require("path");
 const { disconnect } = require("process");
-const homepageRouter = require('./routers/router')
+const router = require('./routers/router')
 
 app.use(express.json());
 
@@ -17,7 +17,7 @@ app.get("/", (req, res) => {
 
 
 
-app.use('/homepage', homepageRouter)
+app.use('/api', router);
 
 app.use((err, req, res, next) => {
   const defaultErr = {
