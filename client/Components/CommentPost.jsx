@@ -29,6 +29,7 @@ const Post = () => {
           throw new Error("Request Failed");
         }
         const newPost = await response.json();
+
         console.log('newpost', newPost)
       } catch (err) {
         console.log("error at post ");
@@ -52,6 +53,9 @@ const Post = () => {
   //         }
   //     }
   // },[])
+
+  //array that iterates thru the array of posts
+    //render each post to the page 
 
   const postfeed = "placeholder";
   return isLoading ? (
