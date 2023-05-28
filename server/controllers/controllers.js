@@ -39,6 +39,20 @@ controller.createPost = async (req, res, next) => {
   }
 };
 
+controller.login = async (req, res, next) => {
+  console.log('req body:', req.body);
+  const { pwValue, accValue } = req.body;
+  try{
+    const user = await Users.find({ pwValue, accValue });
+    res.locals.user = user;
+    return next();
+  }
+  catch(err){
+    console.log('Error in login', err);
+    return next(err);
+  }
+}
+
 // controller.createComment = async (req, res, next) =>{
 //   const
 
