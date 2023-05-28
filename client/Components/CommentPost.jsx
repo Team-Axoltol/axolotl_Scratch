@@ -40,14 +40,7 @@ const Post = () => {
     postData();
   };
 
-  let postArr = [
-    {
-      industry: "tech",
-      post: "i love my job",
-      company: "codesmith",
-      date: "12/12/12",
-    },
-  ];
+
   useEffect(() => {
     console.log("in use effect");
     const fetchData = async () => {
