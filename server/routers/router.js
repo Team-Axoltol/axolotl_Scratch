@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.get('/homepage/getPosts', controller.getPosts, (req, res) => {
     console.log('successfully got posts in router');
-    // console.log('res.locals.posts:', res.locals.posts)
+    console.log('res.locals.posts:', res.locals.posts)
     res.status(200).json(res.locals.posts);
 })
 
