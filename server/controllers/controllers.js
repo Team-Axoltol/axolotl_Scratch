@@ -1,8 +1,56 @@
 const Post = require("../models/post");
 const Comment = require("../models/comment");
 const Users = require("../models/user");
+const db = require('../sqlConfig')
+const bcrypt = require('bcrypt');
+
 
 const controller = {};
+
+controller.checkNewUser = async (req, res, next) => {
+  const {name, email, password, password2 } = req.body;
+  // console.log(req.body);
+  //check if user already exists
+  console.log('checking whether email has existing account');
+  db.query(
+    `SELECT * FROM users
+    WHERE email = $1`, [email], (err, results) => {
+      if (err) {
+        console.log('failed at query');
+        return next(err);
+      }
+      // console.log(results.rows) // list of users that matches passed in email
+      if (results.rows.length > 0) {
+        console.log('email has existing account');
+        return res.status(400).json('email already has account'); // email already has account
+      }
+      console.log('email does not have an existing account')
+      return next();
+    }
+  )
+  res.locals.registerInfo = {name, email, password, password2};
+}
+
+controller.createNewUser = async (req, res, next) => {
+  console.log('creating new user');
+  const {name, email, password, password2 } = req.body;
+  console.log('hashing password');
+  const hashedPassword = await bcrypt.hash(password, 10);
+  // console.log(hashedPassword);
+  db.query(
+    `INSERT INTO users (name, email, password)
+    VALUES ($1, $2, $3)
+    RETURNING id, password`, [name, email, hashedPassword], (err, results) => {
+      if (err) {
+        return next(err);
+      }
+      // console.log(results.rows);
+      console.log('added new user to database');
+      res.locals.createdUser = results.rows[0];
+      return next();
+    }
+  )
+}
 
 controller.getPosts = async (req, res, next) => {
   // console.log('req.body of getpost request',req.body);

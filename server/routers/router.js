@@ -4,6 +4,11 @@ const controller = require("../controllers/controllers.js");
 
 const router = express.Router();
 
+router.post('/users/register', controller.checkNewUser, controller.createNewUser, (req, res) => {
+  console.log('new user created')
+  res.status(200).json('new user created');
+})
+
 router.get("/homepage/getPosts/:industry", controller.getPosts, (req, res) => {
    console.log('successfully got posts in router');
   // console.log('res.locals.posts:', res.locals.posts)
