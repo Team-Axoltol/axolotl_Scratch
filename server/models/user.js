@@ -18,6 +18,7 @@ const userSchema = new Schema ({
     posts: [{type: Schema.Types.ObjectId, ref: 'post'}],
     comments: [{type: Schema.Types.ObjectId, ref: 'comment'}],
     liked_posts: [{type: Schema.Types.ObjectId, ref: 'post'}],
+    location: Number,
     followed_topics: [],
 })
 const User = mongoose.model('user', userSchema)
