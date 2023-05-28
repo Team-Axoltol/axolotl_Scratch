@@ -48,28 +48,31 @@ const Post = () => {
       date: "12/12/12",
     },
   ];
-  //   useEffect(() => {
-  //     const fetchData = async () => {
-  //       try {
-  //         setIsLoading(true);
-  //         const response = await fetch(`/api/**`, {
-  //           method: "GET",
-  //           headers: { "Content-Type": "application/json" },
-  //         });
-  //
-  //         postArr = await response.json();
-  //         setInfo(postArr);
-  //       } catch (err) {
-  //         console.log("error in fetching data");
-  //       } finally {
-  //         setIsLoading(false);
-  //       }
-  //     };
-  //     fetchData();
-  //   }, []);
+  useEffect(() => {
+    console.log("in use effect");
+    const fetchData = async () => {
+      console.log("in fetch data");
+      try {
+        setIsLoading(true);
+        const response = await fetch(`/api/homepage/getPosts`, {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+        });
+
+        postArr = await response.json();
+        console.log("postArrresponse", postArr);
+        setInfo(postArr);
+      } catch (err) {
+        console.log("error in fetching data");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
 
   //adjust postArr to be the array or data received from the backend get request
-//   if(!postArr) return null
+  //   if(!postArr) return null
   const postfeed = postArr.map((post) => {
     return (
       <div className="postsCase" key={"123"} style={{ border: "solid 1px" }}>
