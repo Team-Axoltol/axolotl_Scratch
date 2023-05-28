@@ -5,11 +5,18 @@ const Users = require("../models/user");
 const controller = {};
 
 controller.getPosts = async (req, res, next) => {
-  const { industry } = req.body;
+  console.log('req.body of getpost request',req.body);
+  const { industry } = req.params;
   try {
     console.log('getting posts in controller.getposts');
-    const results = await Post.find({ industry: industry });
-    // console.log(results);
+    let results;
+    if (industry) {
+      results = await Post.find({industry: industry});
+    }
+    else {
+      results = await Post.find();
+    }
+    console.log(results);
     res.locals.posts = results;
     return next();
   } catch (err) {
