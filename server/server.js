@@ -15,12 +15,7 @@ app.use(express.urlencoded({extended: false}));
 //   saveUninitialized: false,
 // }))
 
-
 app.use(express.json());
-
-app.post('/users/register', async (req, res) => {
-
-})
 
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
