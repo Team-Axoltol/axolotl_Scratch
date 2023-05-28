@@ -1,6 +1,7 @@
 const Post = require("../models/post");
 const Comment = require("../models/comment");
 const Users = require("../models/user");
+const Jobs = require('../models/Jobs');
 
 const controller = {};
 
@@ -49,6 +50,32 @@ controller.login = async (req, res, next) => {
   }
   catch(err){
     console.log('Error in login', err);
+    return next(err);
+  }
+}
+
+controller.createJobPost = async (req, res, next) => {
+  console.log(req.body);
+  const { industry, company, salary, status } = req.body;
+  try{
+    const job = await Jobs.create( {industry, company, salary, status});
+    res.locals.newJob = job;
+    return next();
+  }
+  catch(err) {
+    console.log('Error in createJobPost controller', err)
+    return next(err);
+  }
+}
+
+controller.getJobPosts = async (req, res, next) => {
+  try{
+    const Jobs = await Jobs.find();
+    res.locals.jobs = Jobs;
+    return next();
+  }
+  catch(err){
+    console.log('Error in getJobPosts controller', err);
     return next(err);
   }
 }
