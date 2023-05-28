@@ -40,11 +40,16 @@ const Post = () => {
     postData();
   };
 
-
+  let postArr = [
+    {
+      industry: "tech",
+      post: "i love my job",
+      company: "codesmith",
+      date: "12/12/12",
+    },
+  ];
   useEffect(() => {
-    console.log("in use effect");
     const fetchData = async () => {
-      console.log("in fetch data");
       try {
         setIsLoading(true);
         const response = await fetch(`/api/homepage/getPosts`, {
@@ -53,7 +58,6 @@ const Post = () => {
         });
 
         postArr = await response.json();
-        console.log("postArrresponse", postArr);
         setInfo(postArr);
       } catch (err) {
         console.log("error in fetching data");
@@ -66,13 +70,13 @@ const Post = () => {
 
   //adjust postArr to be the array or data received from the backend get request
   //   if(!postArr) return null
-  const postfeed = postArr.map((post) => {
+  const postfeed = info.map((post) => {
     return (
-      <div className="postsCase" key={"123"} style={{ border: "solid 1px" }}>
-        <div key={"234"}>{post.industry}</div>
-        <div key={"345"}>{post.company}</div>
-        <div key={"456"}>{post.body}</div>
-        <div key={"567"}>{post.date}</div>
+      <div className="postsCase" key={post.id} style={{ border: "solid 1px" }}>
+        <div>{post.industry}</div>
+        <div>{post.company}</div>
+        <div>{post.body}</div>
+        <div>{post.date}</div>
       </div>
     );
   });
@@ -82,7 +86,7 @@ const Post = () => {
   ) : (
     <div className="postwrapper">
       <div className="filter">
-        <Filter />
+        <Filter info={info} setInfo={setInfo} />
       </div>
       <label>Share your Experience</label>
       <div>
@@ -131,7 +135,7 @@ const Post = () => {
           </button>
         </form>
       </div>
-      <div className="postswrapper">{postfeed}</div>
+      {isLoading ? <p>Loading...</p> : postfeed}
     </div>
   );
 };

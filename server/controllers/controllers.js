@@ -5,10 +5,17 @@ const Users = require("../models/user");
 const controller = {};
 
 controller.getPosts = async (req, res, next) => {
-  const { industry } = req.body;
+  // console.log('req.body of getpost request',req.body);
+  const { industry } = req.params;
+  console.log({ industry });
   try {
-    console.log('getting posts in controller.getposts');
-    const results = await Post.find({ industry: industry });
+    console.log("getting posts in controller.getposts");
+    let results;
+    if (industry) {
+      results = await Post.find({ industry: industry });
+    } else {
+      results = await Post.find();
+    }
     // console.log(results);
     res.locals.posts = results;
     return next();
@@ -18,8 +25,8 @@ controller.getPosts = async (req, res, next) => {
   }
 };
 
-controller.createPost = async ( req, res, next ) => {
-  console.log('creating post in controller.createPost');
+controller.createPost = async (req, res, next) => {
+  console.log("creating post in controller.createPost");
   const { industry, body, company, date } = req.body;
   try {
     const results = await Post.create({ industry, body, date, company });
@@ -33,7 +40,7 @@ controller.createPost = async ( req, res, next ) => {
 };
 
 // controller.createComment = async (req, res, next) =>{
-//   const 
+//   const
 
 //   try{
 //     const comment = await Comment.create({user_id: user_id, parent: parent, body: body, date: date});
