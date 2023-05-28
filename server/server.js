@@ -5,6 +5,9 @@ const io = require("socket.io")(server);
 const path = require("path");
 const { disconnect } = require("process");
 const router = require("./routers/router");
+// const { ERRORS } = require("socks/typings/common/constants");
+
+app.use(express.urlencoded({extended: false}));
 
 app.use(express.json());
 
