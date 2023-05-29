@@ -2,8 +2,9 @@ import React, { useEffect, useReducer, useState } from "react";
 import Filter from "./Filter";
 import image from "./likethumb.png";
 
-const LikeButton = ({ _id }) => {
-  let [count, setCount] = useState(0);
+const LikeButton = ({ _id, likecount }) => {
+  console.log("likecount", likecount);
+  let [count, setCount] = useState(likecount);
 
   const handleClick = () => {
     const likeButton = async () => {

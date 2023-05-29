@@ -74,12 +74,12 @@ const Post = () => {
   //   if(!postArr) return null
   const postfeed = info.map((post) => {
     return (
-      <div className="postsCase" key={post.id} style={{ border: "solid 1px" }}>
+      <div className="postsCase" key={post._id} style={{ border: "solid 1px" }}>
         <div>{post.industry}</div>
         <div>{post.company}</div>
         <div>{post.body}</div>
         <div>{post.date}</div>
-        <LikeButton _id={post._id} />
+        <LikeButton _id={post._id} likecount={post.likeCount} />
       </div>
     );
   });
