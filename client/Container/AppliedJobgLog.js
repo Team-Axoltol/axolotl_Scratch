@@ -7,6 +7,8 @@ function AppliedJobLog() {
   const [valueOfSalary, setValueOfSalary] = useState("");
   const [valueOfStatus, setValueOfStatus] = useState("");
 
+
+
   return (
     <div>
       <NavBar />
