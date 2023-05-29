@@ -7,6 +7,7 @@ function LoginPage() {
 
   const clickhandler = () => {
     console.log(pwValue, accValue);
+    
     //post to somewhere else?
   }
 
