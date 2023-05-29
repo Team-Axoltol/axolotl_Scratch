@@ -20,7 +20,7 @@ const Post = () => {
 
     const postData = async () => {
       try {
-        console.log("posting");
+        // console.log("posting");
         const response = await fetch("/api/homepage/createPost", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -52,6 +52,7 @@ const Post = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        console.log("hihihi");
         setIsLoading(true);
         const response = await fetch(`/api/homepage/getPosts`, {
           method: "GET",
@@ -73,12 +74,12 @@ const Post = () => {
   //   if(!postArr) return null
   const postfeed = info.map((post) => {
     return (
-      <div className="postsCase" key={post.id} style={{ border: "solid 1px" }}>
+      <div className="postsCase" key={post._id} style={{ border: "solid 1px" }}>
         <div>{post.industry}</div>
         <div>{post.company}</div>
         <div>{post.body}</div>
         <div>{post.date}</div>
-        <LikeButton />
+        <LikeButton _id={post._id} likecount={post.likeCount} />
       </div>
     );
   });
