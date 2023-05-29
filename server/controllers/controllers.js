@@ -47,9 +47,11 @@ controller.createPost = async (req, res, next) => {
 
 controller.likePost = async (req, res, next) => {
   console.log('liking post')
-  const { id } = req.body;
+  const { _id } = req.body;
+  console.log(_id)
   try {
-    const likedPost = await Post.findOneAndUpdate({_id: id}, {likeCount: likeCount + 1}, {new: true});
+    const likedPost = await Post.findOneAndUpdate({_id: _id}, {$inc: {likeCount: 1}}, {new: true});
+    console.log('post found');
     res.locals.newCount = likedPost.likeCount;
     return next();
   }

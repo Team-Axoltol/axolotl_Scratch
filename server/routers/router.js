@@ -35,6 +35,11 @@ router.post("/homepage/createPost", controller.createPost, (req, res) => {
   res.status(200).json(res.locals.newPost);
 });
 
+router.post("/homepage/likePost", controller.likePost, (req, res) => {
+  console.log('post liked');
+  res.status(200).json(res.locals.newCount);
+});
+
 router.post('/AppliedJobLog', controller.createJobPost, (req, res) => {
   console.log('Inside AppliedJobLog router. Response is:', res.locals.newJob);
   res.status(200).json(res.locals.newJob);

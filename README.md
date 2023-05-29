@@ -22,7 +22,7 @@ npm install pg
 
 ## mvp 
  - [x] Log-in feature 
- - [] Homepage with curated posts 
+ - [x] Homepage with curated posts 
  - [x] Ability to create posts
  - [] Ability to rate post
  - [] Ability to comment on posts
@@ -30,3 +30,7 @@ npm install pg
  - [] Job tracking portion (log to track apps) 
  - [] Maybe a chat board. 
 
+## stretch
+ - [] post job ad
+ - [] oauth
+ - [] search engine
