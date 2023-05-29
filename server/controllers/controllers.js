@@ -47,34 +47,19 @@ controller.createPost = async (req, res, next) => {
 
 controller.likePost = async (req, res, next) => {
   console.log('liking post')
-  return next();
-}
-
-controller.createJobPost = async (req, res, next) => {
-  console.log(req.body);
-  const { industry, company, salary, status } = req.body;
-  try{
-    const job = await Jobs.create( {industry, company, salary, status});
-    res.locals.newJob = job;
+  const { id } = req.body;
+  try {
+    const likedPost = await Post.findOneAndUpdate({_id: id}, {likeCount: likeCount + 1}, {new: true});
+    res.locals.newCount = likedPost.likeCount;
     return next();
   }
-  catch(err) {
-    console.log('Error in createJobPost controller', err)
-    return next(err);
-  }
-}
-
-controller.getJobPosts = async (req, res, next) => {
-  try{
-    const Jobs = await Jobs.find();
-    res.locals.jobs = Jobs;
-    return next();
-  }
-  catch(err){
-    console.log('Error in getJobPosts controller', err);
-    return next(err);
-  }
-}
+  catch (err) {
+    return next({
+      log: 'error caught in controller.likePost',
+      message: {err: err},
+    });
+  };
+};
 
 controller.createJobPost = async (req, res, next) => {
   console.log(req.body);
