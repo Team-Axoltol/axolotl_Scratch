@@ -27,6 +27,16 @@ router.post("/homepage/createPost", controller.createPost, (req, res) => {
   res.status(200).json(res.locals.newPost);
 });
 
+router.post('/AppliedJobLog', controller.createJobPost, (req, res) => {
+  console.log('Inside AppliedJobLog router. Response is:', res.locals.newJob);
+  res.status(200).json(res.locals.newJob);
+})
+
+router.get('/AppliedJobLog', controller.getJobPosts, (req, res) => {
+  console.log('Inside AppliedJobLog router. Response is:', res.locals.jobs);
+  res.status(200).json(res.locals.jobs);
+})
+
 // router.post('/homepage/createComment', controller.createComment, controller.addComment, (req, res) => {
 //     res.status(200).json(res.locals.comments)
 // })
