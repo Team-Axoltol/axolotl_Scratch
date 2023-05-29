@@ -20,6 +20,7 @@ function LoginPage() {
         });
         //middleware sending back 'new user created'
         const newUser = await response.json();
+        console.log({ newUser });
         if (newUser === "logged in") {
           navigate("/HomePage");
         } else {
@@ -43,6 +44,7 @@ function LoginPage() {
       }}
     >
       <div>
+        <h3>LOG IN</h3>
         <div>
           <span>Account: </span>
         </div>
