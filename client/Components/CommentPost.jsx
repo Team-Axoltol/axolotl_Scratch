@@ -1,5 +1,6 @@
 import React, { useEffect, useReducer, useState } from "react";
 import Filter from "./Filter";
+import LikeButton from "./LikeButton.jsx";
 // import NavBar from './NavBar';
 
 const Post = () => {
@@ -19,7 +20,7 @@ const Post = () => {
 
     const postData = async () => {
       try {
-        console.log("posting");
+        // console.log("posting");
         const response = await fetch("/api/homepage/createPost", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -48,36 +49,37 @@ const Post = () => {
       date: "12/12/12",
     },
   ];
-    useEffect(() => {
-      const fetchData = async () => {
-        try {
-          setIsLoading(true);
-          const response = await fetch(`/api/homepage/getPosts`, {
-            method: "GET",
-            headers: { "Content-Type": "application/json" },
-            
-          });
-  
-          postArr = await response.json();
-          setInfo(postArr);
-        } catch (err) {
-          console.log("error in fetching data");
-        } finally {
-          setIsLoading(false);
-        }
-      };
-      fetchData();
-    }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        console.log("hihihi");
+        setIsLoading(true);
+        const response = await fetch(`/api/homepage/getPosts`, {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+        });
+
+        postArr = await response.json();
+        setInfo(postArr);
+      } catch (err) {
+        console.log("error in fetching data");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
 
   //adjust postArr to be the array or data received from the backend get request
-//   if(!postArr) return null
+  //   if(!postArr) return null
   const postfeed = info.map((post) => {
     return (
-      <div className="postsCase" key={post.id} style={{ border: "solid 1px" }}>
+      <div className="postsCase" key={post._id} style={{ border: "solid 1px" }}>
         <div>{post.industry}</div>
         <div>{post.company}</div>
         <div>{post.body}</div>
         <div>{post.date}</div>
+        <LikeButton _id={post._id} likecount={post.likeCount} />
       </div>
     );
   });
@@ -87,7 +89,7 @@ const Post = () => {
   ) : (
     <div className="postwrapper">
       <div className="filter">
-        <Filter />
+        <Filter info={info} setInfo={setInfo} />
       </div>
       <label>Share your Experience</label>
       <div>

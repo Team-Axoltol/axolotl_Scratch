@@ -5,8 +5,14 @@ const io = require("socket.io")(server);
 const path = require("path");
 const { disconnect } = require("process");
 const router = require("./routers/router");
+const cookieParser = require('cookie-parser');
+// const { ERRORS } = require("socks/typings/common/constants");
+
+app.use(express.urlencoded({extended: false}));
 
 app.use(express.json());
+
+app.use(cookieParser());
 
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));

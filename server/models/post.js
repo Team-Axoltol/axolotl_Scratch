@@ -24,6 +24,7 @@ const postSchema = new Schema({
   company: { type: String, required: true },
   city: { type: String },
   date: { type: String, required: true },
+  likeCount: {type: Number, default: 0},
 });
 
 

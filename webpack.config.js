@@ -1,9 +1,9 @@
 const path = require("path");
 const HTMLWebpackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
-  entry: "./client/index.js",
+  entry: path.resolve(__dirname, "/client/index.js"),
   mode: process.env.NODE_ENV,
 
   output: {
@@ -47,6 +47,10 @@ module.exports = {
         test: /\.css$/i,
         exclude: /node_modules/,
         use: [MiniCssExtractPlugin.loader, "css-loader"],
+      },
+      {
+        test: /\.png|svg|jpg|gif$/,
+        use: ["file-loader"],
       },
       // {
       //   test: /\.m?js$/,
