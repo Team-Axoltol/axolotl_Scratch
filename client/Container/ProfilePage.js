@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import NavBar from "../Components/NavBar.jsx";
 
+//
+
 function Profile() {
   const [user, setUser] = useState({
     name: "JooJooBee Juice",
@@ -8,6 +10,8 @@ function Profile() {
     location: "Cup",
     bio: "I'm a software developer interested in web technologies.",
   });
+
+  
 
   return (
     <div>

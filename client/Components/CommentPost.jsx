@@ -1,5 +1,6 @@
 import React, { useEffect, useReducer, useState } from "react";
 import Filter from "./Filter";
+import LikeButton from "./LikeButton.jsx";
 // import NavBar from './NavBar';
 
 const Post = () => {
@@ -77,6 +78,7 @@ const Post = () => {
         <div>{post.company}</div>
         <div>{post.body}</div>
         <div>{post.date}</div>
+        <LikeButton />
       </div>
     );
   });
