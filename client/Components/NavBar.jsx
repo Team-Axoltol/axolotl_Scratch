@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import LogOut from "../Components/LogoutButton.jsx";
 
 function NavBar() {
   return (
@@ -34,7 +35,7 @@ function NavBar() {
             backgroundColor: "rgba(105, 235, 255, 0.85)",
           }}
         >
-          <Link to="/">Home</Link>
+          <Link to="/HomePage">Home</Link>
         </button>
         <button
           style={{
@@ -64,7 +65,7 @@ function NavBar() {
             backgroundColor: "rgba(105, 235, 255, 0.85)",
           }}
         >
-          <Link to="AppliedJobLog">Job Searching</Link>
+          <Link to="/AppliedJobLog">Job Searching</Link>
         </button>
         <button
           style={{
@@ -79,7 +80,7 @@ function NavBar() {
             backgroundColor: "rgba(105, 235, 255, 0.85)",
           }}
         >
-          New Job Listing
+          <Link to='/NewJobListing'>New Job Listing</Link>
         </button>
         <button
           style={{
@@ -94,8 +95,24 @@ function NavBar() {
             backgroundColor: "rgba(105, 235, 255, 0.85)",
           }}
         >
-          <Link to="LoginPage">Login</Link>
+          <Link to="/NewJobPosting">New Job Posting</Link>
         </button>
+        {/* <button
+          style={{
+            borderRadius: "10px",
+            margin: "0px 10px 0px 10px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            position: "relative",
+            width: "200px",
+            height: "40px",
+            backgroundColor: "rgba(105, 235, 255, 0.85)",
+          }}
+        >
+          <Link to="/LoginPage">Login</Link>
+        </button> */}
+        <LogOut />
       </div>
     </div>
   );
