@@ -1,8 +1,15 @@
+
+
+
+
+const Jobs = require('../models/Jobs');
+
 const Post = require('../models/post');
 const Comment = require('../models/comment');
 const Users = require('../models/user');
 const db = require('../sqlConfig');
 const bcrypt = require('bcrypt');
+
 
 const controller = {};
 
@@ -42,10 +49,11 @@ controller.createNewUser = async (req, res, next) => {
     const results = await db.query(
       `INSERT INTO users (name, email, password)
       VALUES ($1, $2, $3)
-      RETURNING id, password`,
+      RETURNING id, email`,
       [name, email, hashedPassword]);
     console.log('added new user to database');
     res.locals.createdUser = results.rows[0];
+    // console.log(res.locals.createdUser);
     return next();
   }
   catch(err) {
@@ -80,7 +88,9 @@ controller.verifyUser = async (req, res, next) => {
         message: {err: 'wrong password'}
       });
     }
+    console.log(foundUser);
     res.locals.id = foundUser.id;
+    res.locals.email = foundUser.email;
     console.log('verified user/password');
     return next();
     // const user = await Users.find({ pwValue, accValue });
@@ -135,6 +145,32 @@ controller.createPost = async (req, res, next) => {
   };
 };
 
+
+
+controller.createJobPost = async (req, res, next) => {
+  console.log(req.body);
+  const { industry, company, salary, status } = req.body;
+  try{
+    const job = await Jobs.create( {industry, company, salary, status});
+    res.locals.newJob = job;
+    return next();
+  }
+  catch(err) {
+    console.log('Error in createJobPost controller', err)
+    return next(err);
+  }
+}
+
+controller.getJobPosts = async (req, res, next) => {
+  try{
+    const Jobs = await Jobs.find();
+    res.locals.jobs = Jobs;
+    return next();
+  }
+  catch(err){
+    console.log('Error in getJobPosts controller', err);
+    return next(err);
+
 controller.setSSIDCookie = async (req, res, next) => {
   try {
     console.log('setting ssidcookie');
@@ -160,6 +196,7 @@ controller.startSession = async (req, res, next) => {
     );
     console.log('session created');
     return next();
+
   }
   catch (err) {
     return next({

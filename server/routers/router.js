@@ -12,13 +12,14 @@ router.post('/users/register', controller.checkNewUser, controller.createNewUser
 
 router.post('/users/login', controller.verifyUser, controller.setSSIDCookie, controller.startSession, (req, res) => {
   console.log('completed login');
-  res.status(200).json('logged in');
+  res.status(200).json(res.locals.email);
 });
 
 router.post('/users/logout', controller.logout, (req, res) => {
   console.log('completed logout');
   res.status(200).json('logged out');
 });
+
 
 router.get("/homepage/getPosts/:industry", controller.getPosts, (req, res) => {
    console.log('successfully got posts in router');
