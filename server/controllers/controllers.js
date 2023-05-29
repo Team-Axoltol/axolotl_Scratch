@@ -42,10 +42,11 @@ controller.createNewUser = async (req, res, next) => {
     const results = await db.query(
       `INSERT INTO users (name, email, password)
       VALUES ($1, $2, $3)
-      RETURNING id, password`,
+      RETURNING id, email`,
       [name, email, hashedPassword]);
     console.log('added new user to database');
     res.locals.createdUser = results.rows[0];
+    // console.log(res.locals.createdUser);
     return next();
   }
   catch(err) {
@@ -80,7 +81,9 @@ controller.verifyUser = async (req, res, next) => {
         message: {err: 'wrong password'}
       });
     }
+    console.log(foundUser);
     res.locals.id = foundUser.id;
+    res.locals.email = foundUser.email;
     console.log('verified user/password');
     return next();
     // const user = await Users.find({ pwValue, accValue });
