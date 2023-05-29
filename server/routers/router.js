@@ -10,9 +10,14 @@ router.post('/users/register', controller.checkNewUser, controller.createNewUser
   res.status(200).json('new user created');
 });
 
-router.post('/users/login', controller.login, (req, res) => {
-  console.log('Inside router now. Response is:', res.locals.user);
-  res.status(200).json(res.locals.user);
+router.post('/users/login', controller.verifyUser, controller.setSSIDCookie, controller.startSession, (req, res) => {
+  console.log('completed login');
+  res.status(200).json('logged in');
+});
+
+router.post('/users/logout', controller.logout, (req, res) => {
+  console.log('completed logout');
+  res.status(200).json('logged out');
 });
 
 router.get("/homepage/getPosts/:industry", controller.getPosts, (req, res) => {
