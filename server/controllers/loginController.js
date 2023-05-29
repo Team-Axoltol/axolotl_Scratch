@@ -113,9 +113,9 @@ loginController.startSession = async (req, res, next) => {
   console.log('starting session');
   try {
     const result = await db.query(
-      `INSERT INTO sessions (cookieId)
-      VALUES ($1)`,
-      [res.locals.id]
+      `INSERT INTO sessions (cookieId, sessionid)
+      VALUES ($1, $2)`,
+      [res.locals.id, res.locals.id + Date.now()]
     );
     console.log('session created');
     return next();
