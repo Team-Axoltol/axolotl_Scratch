@@ -19,3 +19,18 @@ npm install socket.io
 npm install cookie-parser
 npm install webpack --save-dev
 npm install pg
+
+## mvp 
+ - [x] Log-in feature 
+ - [x] Homepage with curated posts 
+ - [x] Ability to create posts
+ - [ ] Ability to rate post
+ - [ ] Ability to comment on posts
+ - [ ] Job Posting available now 
+ - [ ] Job tracking portion (log to track apps) 
+ - [ ] Maybe a chat board. 
+
+## stretch
+ - [ ] post job ad
+ - [ ] oauth
+ - [ ] search engine

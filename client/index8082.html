@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Websockets Chat~!</title>
+</head>
+<body>
+    <div id='root2'></div>
+        <div class = 'msgBoard'>
+        <div id = 'msgShowArea' style = 'width: 500px; height: 200px; background-color: rgba(180, 255, 255, 0.5);'>
+
+        </div>
+        <div>
+            <input id = 'msgInput'></input>
+            <button id = 'msgSend'>Send</button>
+            
+        </div>
+    </div>
+    <script src = '/public/socket.io.js'></script>
+    <script>
+        console.log("testtestest");
+        var msgInput = document.getElementById('msgInput');
+        var msgSend = document.getElementById('msgSend');
+        var msgShowArea = document.getElementById('msgShowArea');
+        msgShowArea.style.overflow = 'auto';
+        var socket = io('http://localhost:8082');
+        socket.on('connection', (socket) => {
+            console.log('YOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOclientOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO')
+
+        });
+        msgSend.addEventListener('click', ()=>{
+            msg = document.getElementById('msgInput').value;
+            socket.emit('chat message', msg);
+        })
+        socket.on('chat message', (msg) => {
+            let item = document.createElement('li');
+            item.style.listStyle = 'none';
+            item.textContent = msg;
+            msgShowArea.appendChild(item);
+            if (msgShowArea.childElementCount > 20) {
+                msgShowArea.firstChild.remove();
+            }
+            msgShowArea.scrollTo(0, msgShowArea.scrollHeight);
+            });
+    </script>
+</body>
+</html>

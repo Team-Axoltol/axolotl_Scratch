@@ -4,8 +4,9 @@ class Chat extends React.Component {
     constructor(props) {
         super(props);
         this.state = { username: '', message: '', messages: [] };
-        this.socket = io('http://localhost:5200');
+        this.socket = io('http://localhost:8082');
         this.socket.on('RECEIVE_MESSAGE', function (data) {
+            console.log("YOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOclientOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO")
             addMessage(data);
         });
         const addMessage = data => {
