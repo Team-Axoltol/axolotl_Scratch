@@ -12,11 +12,11 @@ function NewJobPosting() {
 
   const clickhandler = () => {
     const postData = async () => {
-      try {
-        const response = await fetch("api/AppliedJobLog", {
-          method: "POST",
-          headers: { "Content-type": "application/json" },
-          body: JSON.stringify({
+        try {
+        const response = await fetch("api/newJobListing", {
+            method: "POST",
+            headers: { "Content-type": "application/json" },
+            body: JSON.stringify({
             industry: industryValue,
             company: companyValue,
             jobTitle: titleValue,

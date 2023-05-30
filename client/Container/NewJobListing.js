@@ -7,8 +7,8 @@ function NewJobListing() {
 
   useEffect(() => {
     const fetchJobs = async () => {
-      try {
-        const response = await fetch("api/AppliedJobLog");
+        try {
+        const response = await fetch("api/getJobListings")
         const data = await response.json();
         setJobs(data);
       } catch (err) {

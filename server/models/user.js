@@ -13,13 +13,15 @@ mongoose.connect(MONGO_URI, {
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema ({
-    username: {type: String, required: true},
+    name: {type: String, required: true},
     bio: {type: String, default: 'worker'},
     posts: [{type: Schema.Types.ObjectId, ref: 'post'}],
     comments: [{type: Schema.Types.ObjectId, ref: 'comment'}],
     liked_posts: [{type: Schema.Types.ObjectId, ref: 'post'}],
     location: Number,
-    followed_topics: [],
+    industry: {type: String, default: 'Unemployed'},
+    email: {type: String, required: true},
+    jobLog: [{type: Schema.Types.ObjectId, ref: 'appliedjob'}]
 })
 const User = mongoose.model('user', userSchema)
 
