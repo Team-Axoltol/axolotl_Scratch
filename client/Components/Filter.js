@@ -20,9 +20,7 @@ const Filter = (props) => {
     const fetchData = async () => {
       try {
         console.log("selected value", selectedValue);
-        const response = await fetch(
-          `/api/homepage/getPosts/${selectedValue}`
-        );
+        const response = await fetch(`/api/homepage/getPosts/${selectedValue}`);
         const posts = await response.json();
         console.log("post response", posts);
 
@@ -37,6 +35,7 @@ const Filter = (props) => {
 
   return (
     <div>
+      <div>Select Industry:</div>
       <select value={selectedValue} onChange={handleSelectionChange}>
         <option value="">Select an option</option>
         <option value="Tech">Tech</option>

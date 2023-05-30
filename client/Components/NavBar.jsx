@@ -1,12 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import LogOut from "../Components/LogoutButton.jsx";
 
-function NavBar() {
+function NavBar({ email }) {
+  console.log('email in navbar.js', email)
+
+
   return (
     <div
       className="NavBarClass"
       style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        position: "relative",
         width: "100vw",
         height: "50px",
         backgroundColor: "rgba(180, 225, 255, 0.65)",
@@ -65,7 +72,9 @@ function NavBar() {
             backgroundColor: "rgba(105, 235, 255, 0.85)",
           }}
         >
-          <Link to="/AppliedJobLog">Job Searching</Link>
+          <Link to={{ pathname: "/AppliedJobLog", state: { email } }}>
+            My Application Log
+          </Link>
         </button>
         <button
           style={{
@@ -80,7 +89,7 @@ function NavBar() {
             backgroundColor: "rgba(105, 235, 255, 0.85)",
           }}
         >
-          <Link to='/NewJobListing'>New Job Listing</Link>
+          <Link to="/NewJobListing">New Job Listing</Link>
         </button>
         <button
           style={{

@@ -23,10 +23,9 @@ const postSchema = new Schema({
   industry: { type: String },
   company: { type: String, required: true },
   city: { type: String },
-  date: { type: String, required: true },
-  likeCount: {type: Number, default: 0},
+  date: { type: String, default: Date.now() },
+  likeCount: { type: Number, default: 0 },
 });
-
 
 // const postSchema = new Schema({
 //   body: { type: String },
@@ -34,7 +33,6 @@ const postSchema = new Schema({
 //   company: { type: String },
 //   date: { type: String },
 // });
-
 
 const Post = mongoose.model("post", postSchema);
 
