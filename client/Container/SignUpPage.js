@@ -91,7 +91,7 @@ function SignUpPage() {
         </div>
       </div>
       <div>
-        <button onClick={() => clickhandler()}>This is a button :D</button>
+        <button onClick={() => clickhandler()}>Log In</button>
       </div>
       <button>
         <Link to="/">Log In Page</Link>
