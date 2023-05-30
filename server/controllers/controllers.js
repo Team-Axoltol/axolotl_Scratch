@@ -7,7 +7,7 @@ const controller = {};
 controller.getPosts = async (req, res, next) => {
   // console.log('req.body of getpost request',req.body);
   const { industry } = req.params;
-  console.log({ industry });
+  console.log('fetching posts from the industry:', industry);
   try {
     console.log('getting posts in controller.getposts');
     let results;
