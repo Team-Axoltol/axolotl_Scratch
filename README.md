@@ -24,11 +24,11 @@ npm install pg
  - [x] Log-in feature 
  - [x] Homepage with curated posts 
  - [x] Ability to create posts
- - [ ] Ability to rate post
+ - [x] Ability to rate post
  - [ ] Ability to comment on posts
- - [ ] Job Posting available now 
+ - [x] Job Posting available now 
  - [ ] Job tracking portion (log to track apps) 
- - [ ] Maybe a chat board. 
+ - [x] Maybe a chat board. 
 
 ## stretch
  - [ ] post job ad
