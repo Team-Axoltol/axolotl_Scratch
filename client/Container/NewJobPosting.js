@@ -12,27 +12,27 @@ function NewJobPosting() {
 
   const clickhandler = () => {
     const postData = async () => {
-        try {
+      try {
         const response = await fetch("api/AppliedJobLog", {
-            method: "POST",
-            headers: { "Content-type": "application/json" },
-            body: JSON.stringify({
+          method: "POST",
+          headers: { "Content-type": "application/json" },
+          body: JSON.stringify({
             industry: industryValue,
             company: companyValue,
             jobTitle: titleValue,
             salary: salaryValue,
             status: contentValue,
-            }),
+          }),
         });
         //middleware sending back 'new user created'
         const newJob = await response.json();
         return newJob;
-        } catch (err) {
+      } catch (err) {
         throw new Error("Request Failed in signup response");
-        }
+      }
     };
     postData();
-  }
+  };
 
   return (
     <div>

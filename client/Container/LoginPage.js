@@ -22,7 +22,7 @@ function LoginPage() {
         const newUser = await response.json();
         console.log({ newUser });
         if (newUser === accValue) {
-          navigate("/HomePage");
+          navigate("/HomePage", { state: accValue });
         } else {
           navigate("/SignUpPage");
         }
@@ -46,7 +46,7 @@ function LoginPage() {
       <div>
         <h3>LOG IN</h3>
         <div>
-          <span>Account: </span>
+          <span>E-mail: </span>
         </div>
         <div>
           <input
@@ -70,7 +70,7 @@ function LoginPage() {
         </div>
       </div>
       <div>
-        <button onClick={() => clickhandler()}>This is a button :D</button>
+        <button onClick={() => clickhandler()}>Log In</button>
       </div>
       <div>
         <button>

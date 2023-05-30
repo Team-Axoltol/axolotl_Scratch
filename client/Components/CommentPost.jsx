@@ -66,11 +66,15 @@ const Post = () => {
   //   if(!postArr) return null
   const postfeed = info.map((post) => {
     return (
-      <div className="postsCase" key={post._id} style={{ border: "solid 1px" }}>
-        <div>{post.industry}</div>
-        <div>{post.company}</div>
-        <div>{post.body}</div>
-        <div>{post.date}</div>
+      <div
+        className="postsCase"
+        key={post._id}
+        style={{ border: "solid 1px", fontSize: "18px" }}
+      >
+        <div style={{ fontSize: "18px" }}>{post.industry}</div>
+        <div style={{ fontSize: "18px" }}>{post.company}</div>
+        <div style={{ fontSize: "18px" }}>{post.body}</div>
+        {/* <div>{post.date}</div> */}
         <LikeButton _id={post._id} likecount={post.likeCount} />
       </div>
     );
@@ -86,46 +90,94 @@ const Post = () => {
       <label>Share your Experience</label>
       <div>
         <form className="post" onSubmit={handleSubmit}>
-          <label>Industry</label>
-          <input
-            onChange={(e) =>
-              setFormDataRes({ ...formDataRes, industry: e.target.value })
-            }
-            value={formDataRes.industry}
-            type="text"
-            name="industry"
-          />
-          <label>Company</label>
+          <div
+            className="industryDiv"
+            style={{
+              margin: "10px 0px 0px 10px",
+              width: "95%",
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            <label>Industry</label>
+            <input
+              onChange={(e) =>
+                setFormDataRes({ ...formDataRes, industry: e.target.value })
+              }
+              style={{
+                border: "solid 1px rgba(140, 200, 255, 075)",
+                height: "24px",
+                marginTop: "5px",
+              }}
+              value={formDataRes.industry}
+              type="text"
+              name="industry"
+            />
+          </div>
+          <div
+            className="companyDiv"
+            style={{
+              margin: "10px 0px 0px 10px",
+              width: "95%",
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            <label>Company</label>
+            <input
+              onChange={(e) =>
+                setFormDataRes({ ...formDataRes, company: e.target.value })
+              }
+              style={{
+                border: "solid 1px rgba(140, 200, 255, 075)",
+                height: "24px",
+                marginTop: "5px",
+              }}
+              value={formDataRes.company}
+              type="text"
+              name="company"
+            />
+          </div>
+          <div
+            className="bodyDiv"
+            style={{
+              margin: "10px 0px 0px 10px",
+              width: "95%",
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            <label>Body</label>
 
-          <input
-            onChange={(e) =>
-              setFormDataRes({ ...formDataRes, company: e.target.value })
-            }
-            value={formDataRes.company}
-            type="text"
-            name="company"
-          />
-          <label>Body</label>
+            <input
+              onChange={(e) =>
+                setFormDataRes({ ...formDataRes, body: e.target.value })
+              }
+              value={formDataRes.body}
+              type="text"
+              name="company"
+              style={{
+                border: "solid 1px rgba(140, 200, 255, 075)",
+                height: "20vh",
+                marginTop: "5px",
+              }}
+            />
+          </div>
+          {/* <label>Date</label> */}
 
-          <input
-            onChange={(e) =>
-              setFormDataRes({ ...formDataRes, body: e.target.value })
-            }
-            value={formDataRes.body}
-            type="text"
-            name="company"
-          />
-          <label>Date</label>
-
-          <input
+          {/* <input
             onChange={(e) =>
               setFormDataRes({ ...formDataRes, date: e.target.value })
             }
             value={formDataRes.date}
             type="date"
             name="post"
-          />
-          <button className="postbutton" type="submit">
+          /> */}
+          <button
+            className="postbutton"
+            type="submit"
+            style={{ textAlign: "right", margin: "2px", padding: "2px" }}
+          >
             POST
           </button>
         </form>
