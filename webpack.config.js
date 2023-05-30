@@ -65,7 +65,6 @@ module.exports = [{
     hot: true,
     static: {
       directory: path.join(__dirname, "./build"),
-      // publicPath:
     },
     proxy: {
       "/api/**": "http://localhost:3000"

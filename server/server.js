@@ -9,11 +9,13 @@ const { disconnect } = require("process");
 const router = require("./routers/router");
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
+
 // const { ERRORS } = require("socks/typings/common/constants");
 app2.use(cors());
 
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
+app2.use(express.json());
 app.use(cookieParser());
 
 app.get("/", (req, res) => {
@@ -28,15 +30,24 @@ app2.use('/public', express.static(path.join(__dirname,'../jsForWebsockets')));
 
 app.use("/api", router);
 
+
+////////not working////////
+app.post('/storeInput', (req, res) => {
+  console.log('eqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeq', req);
+    // const { name } = req.body;
+    // console.log('Received name from client:', name);
+  res.sendStatus(200); // Send a response back to the client
+});
+////////not working////////
+
 io.on("connection", (socket) => {
+  console.log('YOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOserver');
   io.emit("connection", socket.id);//check connection
+  socket.on("chat message", (msg, userName001) => {   //socket ....> subject
+    io.emit("chat message", msg, userName001);
+  });
 });
 
-  socket.on("chat message", (msg) => {   //socket ....> subject
-    io.emit("chat message", msg);
-  });
-
-  
 app.use((err, req, res, next) => {
   const defaultErr = {
     log: "Express error handler caught unknown middleware error",

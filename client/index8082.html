@@ -6,44 +6,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Websockets Chat~!</title>
 </head>
-<body>
+<body style = "border: 0px; margin: 0px; width: 350px; height: 260px; overflow: hidden;">
     <div id='root2'></div>
         <div class = 'msgBoard'>
-        <div id = 'msgShowArea' style = 'width: 500px; height: 200px; background-color: rgba(180, 255, 255, 0.5);'>
+        <div id = 'msgShowArea' style = 'padding: 5px 10px 5px 10px; width: 330px; height: 240px; background-color: rgba(120, 200, 250, 0.15); color: rgba(50, 80, 60, 0.8); font-family: Cambria, Cochin, Georgia, Times; scrollbar-width: thin;'>
 
         </div>
-        <div>
-            <input id = 'msgInput'></input>
-            <button id = 'msgSend'>Send</button>
-            
+        <div style = 'background-color: rgba(120, 200, 250, 0.15);'>
+            <form id = 'form' action = "">
+                <input id = 'msgInput' autocomplete = "off" style = 'width: 280px; margin: 2.5px 0px 0px 5px; height: 20px; border-radius: 10px; border: 1px solid rgba(100, 150, 200, 0.5);'></input>
+                <button id = 'msgSend' style = 'width: 50px; margin: 2.5px 0px 0px 0px; height: 22px; border-radius: 10px; border: 1px solid rgba(100, 150, 200, 0.5); cursor: pointer; background-color: rgba(230, 200, 255, 0.8); color: rgba(60, 130, 180, 1); font-weight: 600; '>Send</button>
+            </form>
         </div>
     </div>
     <script src = '/public/socket.io.js'></script>
     <script>
         console.log("testtestest");
-        var msgInput = document.getElementById('msgInput');
-        var msgSend = document.getElementById('msgSend');
-        var msgShowArea = document.getElementById('msgShowArea');
+        const msgInput = document.getElementById('msgInput');
+        const msgSend = document.getElementById('msgSend');
+        const msgShowArea = document.getElementById('msgShowArea');
+        const form = document.getElementById('form');
         msgShowArea.style.overflow = 'auto';
-        var socket = io('http://localhost:8082');
+        const socket = io('http://localhost:8082');
+        let userName001 = 'Primate#';
+        function generateRandomString() {
+            const characters = '0123456789';
+            let randomString = '';
+            for (let i = 0; i < 5; i++) {
+                const randomIndex = Math.floor(Math.random() * characters.length);
+                randomString += characters.charAt(randomIndex);
+            }
+            return randomString;
+        }
+        const nameTail = generateRandomString();
+        userName001 += nameTail;
         socket.on('connection', (socket) => {
-            console.log('YOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOclientOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO')
-
+            console.log('Welcome~!')
         });
-        msgSend.addEventListener('click', ()=>{
+        form.addEventListener('submit', (e)=>{
+            e.preventDefault();
             msg = document.getElementById('msgInput').value;
-            socket.emit('chat message', msg);
+            socket.emit('chat message', msg, userName001);
         })
-        socket.on('chat message', (msg) => {
+        socket.on('chat message', (msg, userName001) => {
             let item = document.createElement('li');
             item.style.listStyle = 'none';
-            item.textContent = msg;
+            item.textContent = userName001 + ': ' + msg;
             msgShowArea.appendChild(item);
             if (msgShowArea.childElementCount > 20) {
                 msgShowArea.firstChild.remove();
             }
             msgShowArea.scrollTo(0, msgShowArea.scrollHeight);
-            });
+        });
     </script>
 </body>
 </html>

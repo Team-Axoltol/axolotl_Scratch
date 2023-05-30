@@ -22,19 +22,19 @@ class Chat extends React.Component {
         }
     } render() { 
         return (
-            <div className="container"> 
-            <div className="row"> 
-            <div className="col-6"> 
-            <div className="card"> 
-            <div className="card-body"> 
-            <div className="card-title">ChatRoom</div>
+            <div> 
+            <div> 
+            <div> 
+            <div> 
+            <div> 
+            <div>ChatRoom</div>
              <hr /> 
-             <div className="messages"> 
+             <div> 
                 {this.state.messages.map(message => { 
                     return (<div>{message.author}: {message.message}</div>) })} 
                     </div>
                         </div> 
-                            <div className="card-footer"> 
+                            <div> 
                                 <input type="text" placeholder="UserName" value={this.state.username} onChange={ev => this.setState({ username: ev.target.value })} className="form-control" /> 
                             <br /> 
                                 <input type="text" placeholder="Content" className="form-control" value={this.state.message} onChange={ev => this.setState({ message: ev.target.value })} /> 

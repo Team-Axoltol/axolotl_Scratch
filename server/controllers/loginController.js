@@ -1,5 +1,6 @@
 const db = require('../sqlConfig');
 const bcrypt = require('bcrypt');
+const fetch = require('node-fetch');
 
 const loginController = {};
 
@@ -43,6 +44,25 @@ loginController.createNewUser = async (req, res, next) => {
       [name, email, hashedPassword]);
     console.log('added new user to database');
     res.locals.createdUser = results.rows[0];
+    //////////////////
+    /////for websocket
+      fetch('http://localhost:8081/storeInput', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            name: res.locals.createdUser,
+        }),
+      })
+        .then(res => {
+            console.log('Name sent back to server!');
+            return;
+        })
+        .catch(err => {
+            console.log('Name sent back to server failed......');
+            return;
+        });
+    /////for websocket
+    //////////////////
     // console.log(res.locals.createdUser);
     return next();
   }
@@ -79,6 +99,25 @@ loginController.verifyUser = async (req, res, next) => {
       });
     }
     console.log(foundUser);
+    //////////////////
+    /////for websocket
+    fetch('http://localhost:3000/storeInput', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+          name: foundUser.name
+      }),
+    })
+      .then(res => {
+          console.log('Name sent back to server!');
+          return;
+      })
+      .catch(err => {
+          console.log('Name sent back to server failed......');
+          return;
+      });
+    /////for websocket
+    //////////////////
     res.locals.id = foundUser.id;
     res.locals.email = foundUser.email;
     console.log('verified user/password');

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import NavBar from "../Components/NavBar.jsx";
+import ChatBar from "../Components/ChatBar.jsx";
 
 //
 
@@ -38,6 +39,7 @@ function Profile() {
             <p>Bio: {user.bio}</p>
           </div>
         </div>
+        <ChatBar />
     </div>
   );
 }
