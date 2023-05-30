@@ -13,7 +13,8 @@ const cors = require('cors');
 // const { ERRORS } = require("socks/typings/common/constants");
 app2.use(cors());
 
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({ extended: false }));
+
 app.use(express.json());
 app2.use(express.json());
 app.use(cookieParser());
@@ -46,6 +47,10 @@ io.on("connection", (socket) => {
   socket.on("chat message", (msg, userName001) => {   //socket ....> subject
     io.emit("chat message", msg, userName001);
   });
+});
+
+app.use((req, res) => {
+  res.status(404).send("invalid addr");
 });
 
 app.use((err, req, res, next) => {

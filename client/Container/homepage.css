@@ -1,8 +1,13 @@
 .postandcomments {
     border: 1px solid;
     width: 90%;
-    height: 70vh;
+    /* height: 70%; */
+    height: 80vh;
+}
+.postFeed {
+    height: 60vh;
 
+    overflow-y: auto;
 }
 
 .title {
