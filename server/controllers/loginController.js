@@ -1,6 +1,8 @@
 const db = require('../sqlConfig');
 const bcrypt = require('bcrypt');
 const fetch = require('node-fetch');
+const Users = require('../models/user');
+
 
 const loginController = {};
 
@@ -42,8 +44,10 @@ loginController.createNewUser = async (req, res, next) => {
       VALUES ($1, $2, $3)
       RETURNING id, email`,
       [name, email, hashedPassword]);
-    console.log('added new user to database');
+    console.log('added new user to sql database');
     res.locals.createdUser = results.rows[0];
+
+    const nsqlUser = await Users.create({name, email});
     //////////////////
     /////for websocket
       fetch('http://localhost:8081/storeInput', {
