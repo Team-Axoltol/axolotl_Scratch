@@ -41,14 +41,6 @@ const Post = () => {
     postData();
   };
 
-  let postArr = [
-    {
-      industry: "tech",
-      post: "i love my job",
-      company: "codesmith",
-      date: "12/12/12",
-    },
-  ];
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -138,7 +130,7 @@ const Post = () => {
           </button>
         </form>
       </div>
-      {isLoading ? <p>Loading...</p> : postfeed}
+      <div className="postFeed">{isLoading ? <p>Loading...</p> : postfeed}</div>
     </div>
   );
 };

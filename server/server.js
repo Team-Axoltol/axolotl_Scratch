@@ -5,10 +5,10 @@ const io = require("socket.io")(server);
 const path = require("path");
 const { disconnect } = require("process");
 const router = require("./routers/router");
-const cookieParser = require('cookie-parser');
+const cookieParser = require("cookie-parser");
 // const { ERRORS } = require("socks/typings/common/constants");
 
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({ extended: false }));
 
 app.use(express.json());
 
@@ -26,6 +26,10 @@ io.on("connection", (socket) => {
   socket.on("chat message", (msg2) => {
     console.log(msg2);
   });
+});
+
+app.use((req, res) => {
+  res.status(404).send("invalid addr");
 });
 
 app.use((err, req, res, next) => {

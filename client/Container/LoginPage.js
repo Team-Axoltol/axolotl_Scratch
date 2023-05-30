@@ -21,7 +21,7 @@ function LoginPage() {
         //middleware sending back 'new user created'
         const newUser = await response.json();
         console.log({ newUser });
-        if (newUser === "logged in") {
+        if (newUser === accValue) {
           navigate("/HomePage");
         } else {
           navigate("/SignUpPage");
