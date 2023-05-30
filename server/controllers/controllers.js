@@ -2,6 +2,8 @@ const Post = require('../models/post');
 const Comment = require('../models/comment');
 const Users = require('../models/user');
 const Jobs = require('../models/Jobs');
+const AppliedJobs = require('../models/appliedjob');
+// const AppliedJobs = require ('../models/appliedjobs');
 
 const controller = {};
 
@@ -49,7 +51,6 @@ controller.createPost = async (req, res, next) => {
 controller.likePost = async (req, res, next) => {
   console.log('liking post')
   const { _id } = req.body;
-  console.log(_id)
   try {
     const likedPost = await Post.findOneAndUpdate({_id: _id}, {$inc: {likeCount: 1}}, {new: true});
     console.log('post found');
@@ -64,7 +65,64 @@ controller.likePost = async (req, res, next) => {
   };
 };
 
-controller.createJobPost = async (req, res, next) => {
+controller.newJobApp= async (req, res, next) => {
+  const { email, industry, salary, company, jobTitle, status } = req.body;
+  try{
+    const newJob = await AppliedJobs.create({industry, company, salary, jobTitle, status});
+    const User = await Users.findOne( {email: email} );
+    User.jobLog.push(newJob._id);
+    await User.save();
+    return next();
+  }
+  catch(err){
+    console.log('Error in newJobApp controller', err);
+    return next(err);
+  };
+};
+
+controller.getJobApps = async (req, res, next) => {
+  try {
+    console.log('looking for user');
+    const { email } = req.body;
+    const queryingUser = await Users.findOne({email: email})
+    res.locals.jobs = queryingUser.jobLog;
+    return next();
+  } catch (err) {
+    console.log('Error in getJobApps controller', err);
+    return next(err);
+  };
+};
+
+controller.deleteJobApp = async (req, res, next) => {
+  try {
+    console.log('deleting job app');
+    const { _id } = req.body;
+    await AppliedJobs.deleteOne({_id: _id})
+    return next();
+  } catch (err) {
+    console.log('Error in deleteJobApp controller', err);
+    return next(err);
+  };
+};
+
+controller.changeStatus = async (req, res, next) => {
+  console.log('changing post status')
+  const { _id, newStatus } = req.body;
+  try {
+    const changedPost = await AppliedJobs.findOneAndUpdate({_id: _id}, {status: newStatus}, {new: true});
+    console.log('post found');
+    res.locals.newStatus = changedPost.status;
+    return next();
+  }
+  catch (err) {
+    return next({
+      log: 'error caught in controller.changeStatus',
+      message: {err: err},
+    });
+  };
+};
+
+controller.newJobListing = async (req, res, next) => {
   console.log(req.body);
   const { industry, company, jobTitle, salary, status } = req.body;
   try{
@@ -73,33 +131,23 @@ controller.createJobPost = async (req, res, next) => {
     return next();
   }
   catch(err) {
-    console.log('Error in createJobPost controller', err)
+    console.log('Error in newJobListing controller', err)
     return next(err);
   }
 }
 
-controller.getJobPosts = async (req, res, next) => {
+controller.getJobListings = async (req, res, next) => {
   try {
     const jobs = await Jobs.find(); // Use a different variable name, e.g., 'jobs' instead of 'Jobs'
     res.locals.jobs = jobs;
     return next();
   } catch (err) {
-    console.log('Error in getJobPosts controller', err);
+    console.log('Error in getJobListings controller', err);
     return next(err);
   }
 };
 
-// controller.getJobPosts = async (req, res, next) => {
-//   try{
-//     const Jobs = await Jobs.find();
-//     res.locals.jobs = Jobs;
-//     return next();
-//   }
-//   catch(err){
-//     console.log('Error in getJobPosts controller', err);
-//     return next(err);
-//   }
-// }
+
 
 // controller.createComment = async (req, res, next) =>{
 //   const

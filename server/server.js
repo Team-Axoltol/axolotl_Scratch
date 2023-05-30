@@ -34,7 +34,7 @@ app.use("/api", router);
 
 ////////not working////////
 app.post('/storeInput', (req, res) => {
-  console.log('eqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeq', req);
+  console.log('in store input route', req);
     // const { name } = req.body;
     // console.log('Received name from client:', name);
   res.sendStatus(200); // Send a response back to the client
@@ -42,7 +42,7 @@ app.post('/storeInput', (req, res) => {
 ////////not working////////
 
 io.on("connection", (socket) => {
-  console.log('YOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOserver');
+  console.log('chat connection received by server');
   io.emit("connection", socket.id);//check connection
   socket.on("chat message", (msg, userName001) => {   //socket ....> subject
     io.emit("chat message", msg, userName001);
