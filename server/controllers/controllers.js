@@ -1,6 +1,7 @@
 const Post = require('../models/post');
 const Comment = require('../models/comment');
 const Users = require('../models/user');
+const Jobs = require('../models/Jobs');
 
 const controller = {};
 
@@ -65,9 +66,9 @@ controller.likePost = async (req, res, next) => {
 
 controller.createJobPost = async (req, res, next) => {
   console.log(req.body);
-  const { industry, company, salary, status } = req.body;
+  const { industry, company, jobTitle, salary, status } = req.body;
   try{
-    const job = await Jobs.create( {industry, company, salary, status});
+    const job = await Jobs.create( {industry, company, jobTitle, salary, status});
     res.locals.newJob = job;
     return next();
   }
@@ -78,16 +79,27 @@ controller.createJobPost = async (req, res, next) => {
 }
 
 controller.getJobPosts = async (req, res, next) => {
-  try{
-    const Jobs = await Jobs.find();
-    res.locals.jobs = Jobs;
+  try {
+    const jobs = await Jobs.find(); // Use a different variable name, e.g., 'jobs' instead of 'Jobs'
+    res.locals.jobs = jobs;
     return next();
-  }
-  catch(err){
+  } catch (err) {
     console.log('Error in getJobPosts controller', err);
     return next(err);
   }
-}
+};
+
+// controller.getJobPosts = async (req, res, next) => {
+//   try{
+//     const Jobs = await Jobs.find();
+//     res.locals.jobs = Jobs;
+//     return next();
+//   }
+//   catch(err){
+//     console.log('Error in getJobPosts controller', err);
+//     return next(err);
+//   }
+// }
 
 // controller.createComment = async (req, res, next) =>{
 //   const
