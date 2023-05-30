@@ -10,8 +10,9 @@ const Post = () => {
     industry: "",
     company: "",
     body: "",
-    date: "",
+    // date: "",
   });
+  let postArr;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -30,6 +31,8 @@ const Post = () => {
           throw new Error("Request Failed");
         }
         const newPost = await response.json();
+        console.log("this is new post", newPost);
+        setInfo(newPost);
 
         //set array with the new arrray
         console.log("newpost", newPost);
@@ -51,7 +54,7 @@ const Post = () => {
           headers: { "Content-Type": "application/json" },
         });
 
-        postArr = await response.json();
+        let postArr = await response.json();
         setInfo(postArr);
       } catch (err) {
         console.log("error in fetching data");
