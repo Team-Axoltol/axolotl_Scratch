@@ -40,15 +40,39 @@ router.post("/homepage/likePost", controller.likePost, (req, res) => {
   res.status(200).json(res.locals.newCount);
 });
 
-router.post('/AppliedJobLog', controller.createJobPost, (req, res) => {
-  console.log('Inside AppliedJobLog router. Response is:', res.locals.newJob);
-  res.status(200).json(res.locals.newJob);
-})
+router.post('/newJobApp', controller.newJobApp, (req, res) => {
+  console.log('new job app added');
+  res.status(200).json('New job added to log');
+});
 
-router.get('/AppliedJobLog', controller.getJobPosts, (req, res) => {
-  console.log('Inside AppliedJobLog router. Response is:', res.locals.jobs);
+router.get('/getJobApps', controller.getJobApps, (req, res) => {
+  console.log('fetched all job apps');
   res.status(200).json(res.locals.jobs);
-})
+});
+
+router.get('/deleteJobApp', controller.deleteJobApp, (req,res) => {
+  console.log('deleting job app');
+  res.status(200).json('job app deleted');
+});
+
+router.get('/updateJobStatus', controller.changeStatus, (req, res) => {
+  console.log('updated job status to', res.locals.newStatus);
+  res.status(200).json(res.locals.newStatus);
+});
+
+router.post('/newJobListing', controller.newJobListing, (req, res) => {
+  console.log('new job listed');
+  res.status(200).json(res.locals.newJob);
+});
+
+router.get('/getJobListings', controller.getJobListings, (req, res) => {
+  console.log('fetched all job listings');
+  res.status(200).json(res.locals.jobs);
+});
+
+
+
+
 
 // router.post('/homepage/createComment', controller.createComment, controller.addComment, (req, res) => {
 //     res.status(200).json(res.locals.comments)

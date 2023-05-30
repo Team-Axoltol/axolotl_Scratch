@@ -9,7 +9,7 @@ function NewJobListing() {
 
     const fetchJobs = async () => {
         try {
-        const response = await fetch("api/AppliedJobLog")
+        const response = await fetch("api/getJobListings")
         const data = await response.json();
         setJobs(data);
         } catch (err) {
