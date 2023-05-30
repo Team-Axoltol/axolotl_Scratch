@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import NavBar from "../Components/NavBar.jsx";
+import ChatBar from "../Components/ChatBar.jsx";
+import { Link } from "react-router-dom";
 
 function NewJobPosting() {
   const [industryValue, setIndustryValue] = useState("");
@@ -117,10 +119,11 @@ function NewJobPosting() {
         </div>
         <div style={{ textAlign: "right" }}>
           <button className="BtnSubmit" onClick={() => clickhandler()}>
-            Post it ~!
+            <Link to="/NewJobListing">Post it ~!</Link>
           </button>
         </div>
       </div>
+      <ChatBar />
     </div>
   );
 }

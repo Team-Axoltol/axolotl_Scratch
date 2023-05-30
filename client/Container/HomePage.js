@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import NavBar from "../Components/NavBar.jsx";
 import Post from "../Components/CommentPost.jsx";
+import ChatBar from "../Components/ChatBar.jsx";
 // const HTMLWebpackPlugin = require("html-webpack-plugin");
 // const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
@@ -29,6 +30,7 @@ const Home = () => {
           <Post />
         </div>
       </div>
+      <ChatBar />
     </div>
   );
 };

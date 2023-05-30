@@ -1,8 +1,10 @@
+'use strict'
 const path = require("path");
 const HTMLWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
-module.exports = {
+module.exports = [{
   entry: path.resolve(__dirname, "/client/index.js"),
   mode: process.env.NODE_ENV,
 
@@ -12,6 +14,7 @@ module.exports = {
   },
 
   plugins: [
+    new CleanWebpackPlugin(),
     new HTMLWebpackPlugin({
       template: "./client/index.html",
     }),
@@ -19,30 +22,27 @@ module.exports = {
   ],
   module: {
     rules: [
+      // {
+      //   test: /\.jsx?/,
+      //   exclude: /node_modules/,
+      //   use: {
+      //     loader: "babel-loader",
+      //     options: {
+      //       presets: ["@babel/preset-env", "@babel/preset-react"],
+      //     },
+      //   },
+      // },
       {
-        test: /\.jsx?/,
+        test: /\.(m?js|jsx?)$/,
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
           options: {
             presets: ["@babel/preset-env", "@babel/preset-react"],
+            plugins: ["@babel/plugin-transform-object-assign"],
           },
         },
       },
-      // {////eric
-      //   test: /\.m?js$/,
-      //   use: {
-      //     loader: "babel-loader",
-      //     options: {
-      //       presets: ["@babel/preset-env"], // ensure compatibility with older browsers
-      //       plugins: ["@babel/plugin-transform-object-assign"], // ensure compatibility with IE 11
-      //     },
-      //   },
-      // },
-      // {
-      //   test: /\.js$/,
-      //   loader: "webpack-remove-debug", // remove "debug" package
-      // },////eric
       {
         test: /\.css$/i,
         exclude: /node_modules/,
@@ -59,15 +59,21 @@ module.exports = {
       // },
     ],
   },
-  devServer: {
+  devServer: { //main
     port: 8081,
     historyApiFallback: true,
+    hot: true,
     static: {
       directory: path.join(__dirname, "./build"),
-      // publicPath:
     },
     proxy: {
-      "/api/**": "http://localhost:3000",
+      "/api/**": "http://localhost:3000"
     },
   },
-};
+  performance: {
+    hints: false,
+    maxEntrypointSize: 512000,
+    maxAssetSize: 512000
+  }
+}, 
+]

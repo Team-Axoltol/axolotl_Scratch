@@ -1,30 +1,51 @@
 const express = require("express");
 const app = express();
+const app2 = express();
 const server = require("http").createServer(app);
-const io = require("socket.io")(server);
+const server2 = require("http").createServer(app2);
+const io = require("socket.io")(server2);
 const path = require("path");
 const { disconnect } = require("process");
 const router = require("./routers/router");
-const cookieParser = require("cookie-parser");
+const cookieParser = require('cookie-parser');
+const cors = require('cors');
+
 // const { ERRORS } = require("socks/typings/common/constants");
+app2.use(cors());
 
 app.use(express.urlencoded({ extended: false }));
 
 app.use(express.json());
-
+app2.use(express.json());
 app.use(cookieParser());
 
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
+app2.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/index8082.html"));
+});
+app2.use('/public', express.static(path.join(__dirname,'../jsForWebsockets')));
+
+
 app.use("/api", router);
 
-io.on("connection", (socket) => {
-  console.log("a user connected");
 
-  socket.on("chat message", (msg2) => {
-    console.log(msg2);
+////////not working////////
+app.post('/storeInput', (req, res) => {
+  console.log('eqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeq', req);
+    // const { name } = req.body;
+    // console.log('Received name from client:', name);
+  res.sendStatus(200); // Send a response back to the client
+});
+////////not working////////
+
+io.on("connection", (socket) => {
+  console.log('YOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOserver');
+  io.emit("connection", socket.id);//check connection
+  socket.on("chat message", (msg, userName001) => {   //socket ....> subject
+    io.emit("chat message", msg, userName001);
   });
 });
 
@@ -43,12 +64,14 @@ app.use((err, req, res, next) => {
   return res.status(errorObj.status).json(errorObj.message);
 });
 
+
+server2.listen(8082, () => {
+  console.log("Starting at 8082");
+});
+
 server.listen(3000, () => {
   console.log("Starting at", 3000);
 });
 
-// server.listen(3351, () => {
-//   console.log("Starting at", 3351);
-// });
 
 module.exports = app;
